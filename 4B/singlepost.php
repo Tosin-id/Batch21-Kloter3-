@@ -71,9 +71,20 @@ try {
                 <a href="index.php" class="navbar-brand">Article</a>
             </div>
             <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                <form class="navbar-form navbar-right" role="search">
+                <div class="navbar-form navbar-right">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/img/<?php echo $photo ?>" width="35px" height="35px" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbardrop">
+                        <a class="dropdown-item" href="#">Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="logout.php" style="color: orangered;">Logout</a>
+                    </div>
+                </div>
+                <div class="navbar-form navbar-right">
+                    <a href="add_content.php" class="btn btn-info ml-3">Add Article</a>
                     <a href="logout.php" class="btn btn-default">Logout</a>
-                </form>
+                </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.php">Home</a></li>
                 </ul>
