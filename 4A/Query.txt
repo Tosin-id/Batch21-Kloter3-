@@ -1,0 +1,65 @@
+MariaDB [db_article]> SELECT * FROM article;
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+---------+-------------+
+| id | title                 | content                                                                                                                                                                                                                              | image          | created_at          | id_user | id_category |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+---------+-------------+
+|  1 | Pengertian HTML       | Hypertext Markup Language (HTML) adalah bahasa markah standar untuk dokumen yang dirancang untuk ditampilkan di peramban internet.                                                                                                   | html.png       | 2021-02-13 09:56:40 |       1 |           1 |
+|  2 | Pengertian Javascript | JavaScript adalah bahasa pemrograman tingkat tinggi dan dinamis.                                                                                                                                                                     | javascrit.png  | 2021-02-13 09:57:11 |       2 |           1 |
+|  3 | Pengertian Urbanisasi | Urbanisasi mengacu pada pergeseran populasi dari daerah pedesaan ke perkotaan, "peningkatan bertahap jumlah orang yang tinggal di daerah perkotaan", dan cara-cara di mana setiap masyarakat menyesuaikan diri dengan perubahan ini. | urbanisasi.png | 2021-02-13 09:57:36 |       2 |           3 |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+---------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [db_article]> UPDATE article SET id_user = 3 WHERE id = 2;
+Query OK, 1 row affected (0.102 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_article]> SELECT * FROM article;
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+---------+-------------+
+| id | title                 | content                                                                                                                                                                                                                              | image          | created_at          | id_user | id_category |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+---------+-------------+
+|  1 | Pengertian HTML       | Hypertext Markup Language (HTML) adalah bahasa markah standar untuk dokumen yang dirancang untuk ditampilkan di peramban internet.                                                                                                   | html.png       | 2021-02-13 09:56:40 |       1 |           1 |
+|  2 | Pengertian Javascript | JavaScript adalah bahasa pemrograman tingkat tinggi dan dinamis.                                                                                                                                                                     | javascrit.png  | 2021-02-13 10:00:10 |       3 |           1 |
+|  3 | Pengertian Urbanisasi | Urbanisasi mengacu pada pergeseran populasi dari daerah pedesaan ke perkotaan, "peningkatan bertahap jumlah orang yang tinggal di daerah perkotaan", dan cara-cara di mana setiap masyarakat menyesuaikan diri dengan perubahan ini. | urbanisasi.png | 2021-02-13 09:57:36 |       2 |           3 |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+---------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [db_article]> INSERT INTO article (id, title, content, image, created_at, id_user, id_category)
+    -> VALUES (4,'Pemanasan Global','Pemanasan global (juga disebut Darurat iklim atau Krisis iklim [1]) adalah suatu proses meningkatnya suhu rata-rata atmosfer, laut, dan daratan Bumi.','pemanasanglobal.jpg','2021-02-13 11:20:10',1,2);
+Query OK, 1 row affected (0.083 sec)
+
+MariaDB [db_article]> SELECT * FROM article;
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+---------+-------------+
+| id | title                 | content                                                                                                                                                                                                                              | image               | created_at          | id_user | id_category |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+---------+-------------+
+|  1 | Pengertian HTML       | Hypertext Markup Language (HTML) adalah bahasa markah standar untuk dokumen yang dirancang untuk ditampilkan di peramban internet.                                                                                                   | html.png            | 2021-02-13 09:56:40 |       1 |           1 |
+|  2 | Pengertian Javascript | JavaScript adalah bahasa pemrograman tingkat tinggi dan dinamis.                                                                                                                                                                     | javascrit.png       | 2021-02-13 10:00:10 |       3 |           1 |
+|  3 | Pengertian Urbanisasi | Urbanisasi mengacu pada pergeseran populasi dari daerah pedesaan ke perkotaan, "peningkatan bertahap jumlah orang yang tinggal di daerah perkotaan", dan cara-cara di mana setiap masyarakat menyesuaikan diri dengan perubahan ini. | urbanisasi.png      | 2021-02-13 09:57:36 |       2 |           3 |
+|  4 | Pemanasan Global      | Pemanasan global (juga disebut Darurat iklim atau Krisis iklim [1]) adalah suatu proses meningkatnya suhu rata-rata atmosfer, laut, dan daratan Bumi.                                                                                | pemanasanglobal.jpg | 2021-02-13 11:20:10 |       1 |           2 |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+---------+-------------+
+4 rows in set (0.001 sec)
+
+MariaDB [db_article]> SELECT article.id, article.title, article.content, article.image, article.created_at, author.name as Author, category.name as Category
+    -> FROM article, author, category
+    -> WHERE article.id_user = author.id
+    -> AND article.id_category = category.id
+    -> AND category.name = 'Sosial';
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+--------+----------+
+| id | title                 | content                                                                                                                                                                                                                              | image          | created_at          | Author | Category |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+--------+----------+
+|  3 | Pengertian Urbanisasi | Urbanisasi mengacu pada pergeseran populasi dari daerah pedesaan ke perkotaan, "peningkatan bertahap jumlah orang yang tinggal di daerah perkotaan", dan cara-cara di mana setiap masyarakat menyesuaikan diri dengan perubahan ini. | urbanisasi.png | 2021-02-13 09:57:36 | Budi   | Sosial   |
++----+-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------------+--------+----------+
+1 row in set (0.001 sec)
+
+MariaDB [db_article]> SELECT article.id, article.title, article.content, article.image, article.created_at, author.name as Author, category.name as Category
+    -> FROM article, author, category
+    -> WHERE article.id_user = author.id
+    -> AND article.id_category = category.id
+    -> AND author.name = 'Admin';
++----+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+--------+-----------+
+| id | title            | content                                                                                                                                               | image               | created_at          | Author | Category  |
++----+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+--------+-----------+
+|  1 | Pengertian HTML  | Hypertext Markup Language (HTML) adalah bahasa markah standar untuk dokumen yang dirancang untuk ditampilkan di peramban internet.                    | html.png            | 2021-02-13 09:56:40 | Admin  | Teknologi |
+|  4 | Pemanasan Global | Pemanasan global (juga disebut Darurat iklim atau Krisis iklim [1]) adalah suatu proses meningkatnya suhu rata-rata atmosfer, laut, dan daratan Bumi. | pemanasanglobal.jpg | 2021-02-13 11:20:10 | Admin  | Sains     |
++----+------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+--------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [db_article]>
