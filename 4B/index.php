@@ -79,8 +79,8 @@ try {
                     </div>
                 </div>
                 <div class="navbar-form navbar-right">
-                    <a href="logout.php" class="btn btn-default">Logout</a>
                     <a href="add_content.php" class="btn btn-info ml-3">Add Article</a>
+                    <a href="logout.php" class="btn btn-default">Logout</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="index.php">Home</a></li>
