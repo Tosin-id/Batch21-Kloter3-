@@ -131,7 +131,7 @@ try {
                                 &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> <?php echo $created_at ?>
                                 <?php if ($author == $name) { ?>
                                     &nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span> <a href="edit.php?id=<?php echo $id ?>">Edit</a>
-                                    &nbsp;&nbsp;<button class="btn btn-warning" id="<?php echo $id ?>" onclick="confirm(id)"> Delete</button>
+                                    &nbsp;&nbsp;<button class="btn btn-warning" id="<?php echo $id ?>" onclick="deleteArticle(id)"> Delete</button>
                                 <?php } ?>
                             </div>
                         </div>
@@ -218,13 +218,10 @@ try {
     <script src="lib/jquery-2.0.3.min.js"></script>
     <script src="lib/bootstrap-3.0.3/js/bootstrap.min.js"></script>
     <script>
-        function confirm(id) {
-            // alert("Are you sure for delete this article ?");
-            confirm("Are you sure for delete this article ?");
-            alert(confirm());
-            // if (prompt) {
-            //     location.replace("delete.php?id=" + id);
-            // }
+        function deleteArticle(id) {
+            if (confirm("Are you sure for delete this article ?")) {
+                location.replace("delete.php?id=" + id);
+            }
         }
     </script>
 </body>
